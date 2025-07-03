@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Aura - Acompañante emocional</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <h1>🧘 Aura</h1>
+        <div id="chat-box" class="chat-box"></div>
+        <form id="chat-form">
+            <input type="text" id="user-input" placeholder="Escribe cómo te sientes..." autocomplete="off" required>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <script>
+        const form = document.getElementById("chat-form");
+        const input = document.getElementById("user-input");
+        const chatBox = document.getElementById("chat-box");
+
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            const message = input.value;
+            chatBox.innerHTML += `<div class="user">Tú: ${message}</div>`;
+            input.value = "";
+
+            const response = await fetch("/chat", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({ message })
+            });
+
+            const data = await response.json();
+            chatBox.innerHTML += `<div class="bot">Aura: ${data.response}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        };
+    </script>
+</body>
+</html>
