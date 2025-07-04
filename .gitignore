@@ -1,22 +1,13 @@
-# Ignora entornos virtuales
+# Ignorar entorno virtual
 aura-env/
+.venv/
 
-# Archivos de Python compilados
+# Archivos temporales
 __pycache__/
-*.py[cod]
+*.pyc
+*.pyo
+*.pyd
 
-# Archivos de configuración del sistema
-.DS_Store
-Thumbs.db
-
-# Archivos de modelos grandes
-*.bin
-*.pt
+# Modelos grandes (si no los necesitas)
 *.safetensors
-
-# Archivos de logs (si usas)
-*.log
-
-# Configuraciones locales (VSCode u otros editores)
-.vscode/
-.idea/
+*.bin
